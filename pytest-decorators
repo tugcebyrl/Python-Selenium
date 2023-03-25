@@ -1,0 +1,40 @@
+#Functions and methods are callable.
+#Any object can be called with the __call__() special method.
+#It is an object that can be called in a decorator.
+#Basically, a decorator takes a function, adds new functionality, and returns it.
+
+@decorator_example
+def func1():
+    print("Main Func 1")
+    
+func1()
+
+
+#----Decorators with Parameters----
+
+def divide(a, b):
+    return a/b
+ 
+print(divide(2,5))
+print(divide(0,5))
+print(divide(2,0)) # ERROR
+
+#Show this error by making a decorator
+
+
+def divide2(func):
+    def inner(a,b):
+        print("Bölme işlemi: ", a, "and" , b)
+        if b == 0:
+            print("It is an error")
+            return
+        return func(a,b)
+    return inner
+ 
+@divide2
+def divide(a,b):
+    return a/b
+ 
+print(divide(2,5))
+print(divide(0,5))
+print(divide(2,0))
